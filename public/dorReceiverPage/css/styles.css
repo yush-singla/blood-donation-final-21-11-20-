@@ -1,0 +1,36 @@
+button.b1{
+  color: white;
+  margin-top: 20%;
+  margin-left: 5%;
+  width: 40%;
+  height: 25%;
+  box-sizing: content-box;
+  height: 200px;
+    font-size: 3rem;
+}
+button.b2{
+  color: white;
+  margin-top: 20%;
+  margin-left: 5%;
+  width: 40%;
+  height: 25%;
+  box-sizing: content-box;
+  height: 200px;
+  font-size: 3rem;
+}
+.big-bttn{
+  color: white;
+  text-decoration: none;
+  font-weight: bolder;
+  font-family: Impact, Charcoal, sans-serif;
+}
+.big-bttn:hover{
+  color: white;
+  text-decoration: none;
+
+}
+.signup{
+  margin-left: 10px;
+  padding-left: 23px;
+  padding-right: 23px;
+}

@@ -1,0 +1,39 @@
+<%-include("partials/header")-%>
+<%-include("partials/signinfavicons/favicons")-%>
+<!-- Custom styles for this template -->
+<link href="signinFiles/css/styles.css" rel="stylesheet">
+</head>
+<body class="text-center">
+  <header>
+    <%-include("partials/navbar")-%>
+
+  </header>
+  <!-- <form class="" action="index.html" method="post">
+
+  </form> -->
+<form class="form-signin" method="post" action="/signin">
+<img class="mb-4 imgg" src="signinFiles/download.jpg">
+<h1 class="h3 mb-3 font-weight-normal"> Be a Hero Today!</h1>
+<label for="inputEmail" class="sr-only">Email address</label>
+<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+<label for="inputPassword" class="sr-only">Password</label>
+<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+<!-- <div class="col-auto my-1">
+  <div class="custom-control custom-checkbox mr-sm-2 mb-4">
+    <input type="checkbox" class="custom-control-input " id="customControlAutosizing">
+    <label class="custom-control-label" for="customControlAutosizing">Remember Me</label>
+  </div>
+</div> -->
+
+<!-- <div class=" mb-3 custom-control custom-checkbox">
+<label>
+</label>
+     <input type="checkbox" class="custom-control-input"  value="remember-me"> Remember me
+
+</div> -->
+
+<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</form>
+</body>
+</html>

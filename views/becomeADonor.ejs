@@ -1,0 +1,16 @@
+<%-include("partials/header")-%>
+<%-include("partials/homefavicons/favicons")-%>
+<!-- Custom styles for this template -->
+<link href="homeFiles/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%-include("partials/signInNavbar")-%>
+    </header>
+    <form action="/becomeADonor" method="POST">
+        <label for="">Are You Sure??</label>
+        <button class="btn btn-lg btn-primary" type="submit">Yes</button>
+    </form>
+    <a href="/homeAfterSignIn">Head Back!!!</a>
+    <%-include("partials/footer")-%>

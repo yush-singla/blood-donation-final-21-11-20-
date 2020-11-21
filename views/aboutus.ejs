@@ -1,0 +1,56 @@
+<%-include("partials/header")-%>
+<%-include("partials/aboutusfavicons/favicons")-%>
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .heading1{
+      margin-top: 10%;
+    }
+    .signup {
+      margin-left: 10px;
+      padding-left: 23px;
+      padding-right: 23px;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="starter-template.css" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <% if(!signedIntoAccount){ %>
+    <%-include("partials/navbar")%>
+    <%}else{%>
+      <%-include("partials/signInNavbar")%>
+      <%}%>
+  </header>
+
+<!-- ______________________________________________________________
+______________________________________________________________main content
+______________________________________________________________
+ ______________________________________________________________ -->
+<h1 class="heading1">Our Goal</h1>
+<h5>"We Are India’s Run Initiative Working In The Field Of Blood Donation Trying To Make India Blood Sufficient."
+</h5>
+<img src="aboutusFiles/img1.webp" alt="">
+<h1>Our motto</h1>
+<h5>To contribute towards the problem of shortage of blood in India by raising awareness and improving donor experience and thereby, become a 360-degree solution provider.
+</h5>
+<img src="aboutusFiles/img2.jpg" alt="">
+<h1>Our Vision</h1>
+<h5>To become a single point of contact for blood requirements in the country and make India blood sufficient, through voluntary blood donations, so no life is lost due to the accessibility.
+</h5>
+<img src="aboutusFiles/img3.webp" alt="">
+<%-include("partials/footer")-%>

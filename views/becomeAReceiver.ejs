@@ -1,0 +1,35 @@
+<%-include("partials/header")-%>
+<%-include("partials/homefavicons/favicons")-%>
+<!-- Custom styles for this template -->
+<link href="homeFiles/css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%-include("partials/signInNavbar")-%>
+    </header>
+    <form action="/becomeAReceiver" method="POST">
+        <div class="form-group">
+            <label class="col-md-4 control-label">Blood Group</label>
+            <div class="col-md-4 selectContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                    <select name="bloodGroup" class="form-control selectpicker" required>
+                        <option value="">Select your Blood Group</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <label for="">Are You Sure??</label>
+        <button class="btn btn-lg btn-primary" type="submit">Yes</button>
+    </form>
+    <a href="/homeAfterSignIn">Head Back!!!</a>
+    <%-include("partials/footer")-%>
