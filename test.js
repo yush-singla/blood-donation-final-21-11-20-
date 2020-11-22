@@ -47,27 +47,40 @@
 //   var datetime = new Date();
 //
 // });
-var nodemailer = require('nodemailer');
+// var nodemailer = require('nodemailer');
+//
+// var transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: 'bloodforyou5@gmail.com',
+//     pass: 'aprsy@12345'
+//   }
+// });
+//
+// var mailOptions = {
+//   from: 'bloodforyou5@gmail.com',
+//   to: 'yushsingla@gmail.com',
+//   subject: 'Sending Email using Node.js',
+//   text: 'That was easy!'
+// };
+//
+// transporter.sendMail(mailOptions, function(error, info){
+//   if (error) {
+//     console.log(error);
+//   } else {
+//     console.log('Email sent: ' + info.response);
+//   }
+// });
 
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'bloodforyou5@gmail.com',
-    pass: 'aprsy@12345'
-  }
-});
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
-var mailOptions = {
-  from: 'bloodforyou5@gmail.com',
-  to: 'yushsingla@gmail.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
-};
-
-transporter.sendMail(mailOptions, function(error, info){
-  if (error) {
-    console.log(error);
-  } else {
-    console.log('Email sent: ' + info.response);
-  }
-});
+client.messages
+      .create({
+         body: 'Phantom Menace was clearly the best of the prequel trilogy.',
+         // messagingServiceSid: 'MG9752274e9e519418a7406176694466fa',
+         from: "+19378216745",
+         to: '+918810593719'
+       })
+      .then(message => console.log(message.sid));

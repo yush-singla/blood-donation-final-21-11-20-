@@ -5,6 +5,7 @@ const app = express();
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const alert = require("alert");
+const _ = require('lodash');
 // twilio info in 3 lines from here
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -49,6 +50,7 @@ const userSchema = {
 const User = mongoose.model("User", userSchema);
 const donorSchema = {
   details: userSchema,
+  shareContact: Boolean,
 };
 const Donor = mongoose.model("Donor", donorSchema);
 const receiverSchema = {
@@ -90,18 +92,17 @@ const donor1=new Donor({
   state:"delhi",
   pin:110087,
   dateOfBirth:'2002-12-09'
-
 })
 // donor1.save();*/
 
-var signedIntoAccount=false;
+var signedIntoAccount = false;
 
 // GET Request
 // Home
 app.get("/", function (req, res) {
   currentUser = null;
   res.render("home", {
-    pageTitle: "home page"
+    pageTitle: "home page",
   });
 });
 
@@ -131,6 +132,10 @@ app.get("/signup", function (req, res) {
 
 // Successfull Sign-up page
 app.get("/successfulSignUp", function (req, res) {
+  // if (currentUser == null) {
+  //   alert("Sign In to Continue");
+  //   res.redirect("/signin");
+  // }
   res.render("signinAfterSignupPage", {
     pageTitle: "Sign In Page",
   });
@@ -138,6 +143,10 @@ app.get("/successfulSignUp", function (req, res) {
 
 // ??
 app.get("/donorreceiverpage", function (req, res) {
+  // if (currentUser == null) {
+  //   alert("Sign In to Continue");
+  //   res.redirect("/signin");
+  // }
   Otp.deleteMany({}, function (err) {
     res.render("donorReceiverPage", {
       pageTitle: "welcome",
@@ -149,46 +158,58 @@ app.get("/donorreceiverpage", function (req, res) {
 app.get("/aboutus", function (req, res) {
   res.render("AboutTeam", {
     pageTitle: "about us",
-    signedIntoAccount:signedIntoAccount,
-    username:"???",
+    signedIntoAccount: signedIntoAccount,
+    username: "???",
   });
 });
 app.get("/homeAfterSignIn", function (req, res) {
   if (currentUser == null) {
-    alert("Please Sign In first");
+    alert("Sign In to Continue");
     res.redirect("/signin");
-  } else {
-    res.render("homeAfterSignIn", {
-      username: currentUser.username,
-      pageTitle: "Home",
-    });
   }
+  res.render("homeAfterSignIn", {
+    username: currentUser.username,
+    pageTitle: "Home",
+  });
 });
 app.get("/becomeADonor", (req, res) => {
   if (currentUser == null) {
-    alert("Please Sign In first");
+    alert("Sign In to Continue");
     res.redirect("/signin");
-  } else {
-    res.render("becomeADonor", {
-      username: currentUser.username,
-      pageTitle: "Become A Donor",
-    });
   }
+  Donor.findOne(
+    { "details.username": currentUser.username },
+    (err, results) => {
+      if (!results) {
+        res.render("becomeADonor", {
+          username: currentUser.username,
+          pageTitle: "Become A Donor",
+        });
+      } else {
+        alert("You are already registered as a Donor");
+        res.redirect("/donorList");
+      }
+    }
+  );
 });
 app.get("/becomeAReceiver", (req, res) => {
   if (currentUser == null) {
-    alert("Please Sign In first");
+    alert("Sign In to Continue");
     res.redirect("/signin");
-  } else {
-    res.render("becomeAReceiver", {
-      username: currentUser.username,
-      pageTitle: "Become A Receiver",
-    });
   }
+
+  res.render("becomeAReceiver", {
+    username: currentUser.username,
+    pageTitle: "Become A Receiver",
+  });
 });
 var receiverBloodGroup = null;
 // donor list
 app.get("/donorList", function (req, res) {
+  if (currentUser == null) {
+    alert("Sign In to Continue");
+    res.redirect("/signin");
+  }
   Donor.find(
     {
       "details.bloodGroup": receiverBloodGroup,
@@ -196,17 +217,26 @@ app.get("/donorList", function (req, res) {
     },
     function (err, results) {
       if (!err) {
-        console.log(results);
+        var age=[];
+        for(let i=0;i<results.length;i++){
+          age.push(getAge(results[i].details.dateOfBirth));
+        }
         res.render("List", {
           pageTitle: "donor list",
           results: results,
           username: currentUser.username,
+          age:age
         });
       }
     }
   );
+  receiverBloodGroup = null;
 });
 app.get("/receiverList", (req, res) => {
+  if (currentUser == null) {
+    alert("Sign In to Continue");
+    res.redirect("/signin");
+  }
   Receiver.find(
     {
       "details.bloodGroup": currentUser.bloodGroup,
@@ -214,7 +244,6 @@ app.get("/receiverList", (req, res) => {
     },
     function (err, results) {
       if (!err) {
-        console.log(results);
         res.render("List", {
           pageTitle: "Receiver's List",
           results: results,
@@ -223,16 +252,16 @@ app.get("/receiverList", (req, res) => {
     }
   );
 });
-app.get("/logMeOut",function(req,res){
-  signedIntoAccount=false;
+app.get("/logMeOut", function (req, res) {
+  signedIntoAccount = false;
   res.redirect("/");
 });
 
-app.get("/eligible",function(req,res){
+app.get("/eligible", function (req, res) {
   res.render("eligible", {
-    pageTitle: "check your eligiblity"
+    pageTitle: "check your eligiblity",
   });
-})
+});
 
 // post requests
 // Sign In
@@ -250,7 +279,7 @@ app.post("/signin", function (req, res) {
     } else {
       currentUser = results;
       console.log(currentUser);
-      signedIntoAccount=true;
+      signedIntoAccount = true;
       res.redirect("/homeAfterSignIn");
     }
   });
@@ -277,7 +306,6 @@ app.post("/signup", function (req, res) {
         check = 0;
         console.log("set valid false and am here");
         console.log("the username is already taken by someone else try something else");
-
       }
     });
   }
@@ -301,7 +329,6 @@ console.log(check);
   if (check===1 && ans.user_password != ans.confirm_password) {
     check = 0;
     console.log("password and confirm password donot match plz try again");
-
   }
   if (check===0) {
     console.log("come here");
@@ -345,66 +372,66 @@ console.log(check);
                   res.redirect("/signup");
                 } else {
                   //**********getting all the info from the user to be fed to the database after verifying*****
+                   // _.upperFirst(_.toLower(str))
                   const newUser = new User({
-                    name: ans.first_name + " " + ans.last_name,
+                    name: _.upperFirst(_.toLower(ans.first_name)) + " " + _.upperFirst(_.toLower(ans.last_name)),
                     bloodGroup: ans.bloodGroup,
                     gender: ans.gender,
                     dateOfBirth: ans.dob,
-                    username: ans.user_name,
+                    username: _.upperFirst(_.toLower(ans.user_name)),
                     emailAddress: ans.email,
                     password: ans.user_password,
                     contactNumber: ans.contact_no,
-                    city: ans.city,
+                    city:  ans.city,
                     state: ans.state,
                     pin: ans.pin,
                   });
                   newUser.save();
                   const randOtp1 = Math.floor(1000 + Math.random() * 9000);
+                  console.log(randOtp1);
+                  console.log(ans.contact_no);
+                  client.messages
+                    .create({
+                      body: "your otp is " + randOtp1,
+                      from: "+19378216745",
+                      to: "+91" + ans.contact_no,
+                    })
+                    .then((message) => console.log(message.sid));
 
-                    client.messages
-                      .create({
-                        body: "your otp is" + randOtp1,
-                        from: "+19378216745",
-                        to: "+91" + ans.contact_no,
-                      })
-                      .then((message) => console.log(message.sid));
+                  const randotp2 = Math.floor(1000 + Math.random() * 9000);
+                  console.log(randotp2);
+                  var mailOptions = {
+                    from: "bloodforyou5@gmail.com",
+                    to: ans.email,
+                    subject: "We have your otp for verification",
+                    text: "your Otp is " + randotp2,
+                  };
 
-                    const randotp2 = Math.floor(1000 + Math.random() * 9000);
+                  transporter.sendMail(mailOptions, function (error, info) {
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log("Email sent: " + info.response);
+                    }
+                  });
 
-                    var mailOptions = {
-                      from: "bloodforyou5@gmail.com",
-                      to: ans.email,
-                      subject: "We have your otp for verification",
-                      text: "your Otp is " + randotp2,
-                    };
+                  const newOtp = new Otp({
+                    phoneNo: ans.contact_no,
+                    otpPhone: randOtp1,
+                    email: ans.email,
+                    otpEmail: randotp2,
+                  });
+                  newOtp.save();
 
-                    transporter.sendMail(mailOptions, function (error, info) {
-                      if (error) {
-                        console.log(error);
-                      } else {
-                        console.log("Email sent: " + info.response);
-                      }
-                    });
-
-                    const newOtp = new Otp({
-                      phoneNo: ans.contact_no,
-                      otpPhone: randOtp1,
-                      email: ans.email,
-                      otpEmail: randotp2,
-                    });
-                    newOtp.save();
-
-                    res.redirect("/otp");
+                  res.redirect("/otp");
                 }
                 // res.redirect("/successfulSignUp");
                 /*
                 else {
-
                    let sex;
                    if (ans.department[1] === "Male") {
                      sex = true;
                    } else sex = false;
-
                    //**********getting all the info from the user to be fed to the database after verifying*****
                    const donorNew = new Donor({
                      name: ans.first_name + " " + ans.last_name,
@@ -425,7 +452,6 @@ console.log(check);
                      password: ans.user_password,
                    });
                    newPerson.save();
-
                    res.render("signinAfterSignupPage", {
                      pageTitle: "Sign In Page"
                    });
@@ -472,14 +498,15 @@ app.post("/otp", function (req, res) {
   });
 });
 
-app.get("/aa",function(req,res){
-  res.render("donorReceiverPage",{
-    pageTitle:"welcome"
+app.get("/aa", function (req, res) {
+  res.render("donorReceiverPage", {
+    pageTitle: "welcome",
   });
 });
 app.post("/becomeADonor", (req, res) => {
   const newDonor = new Donor({
     details: currentUser,
+    shareContact: req.body.shareNumber,
   });
   newDonor.save();
   alert("Congratulations on Becoming A Donor !!!");
@@ -487,6 +514,12 @@ app.post("/becomeADonor", (req, res) => {
 });
 
 app.post("/becomeAReceiver", (req, res) => {
+  Receiver.findOneAndDelete(
+    { "details.username": currentUser.username },
+    (err, results) => {
+      console.log(err);
+    }
+  );
   receiverBloodGroup = req.body.bloodGroup;
   const newReceiver = new Receiver({
     details: currentUser,
@@ -498,4 +531,4 @@ app.post("/becomeAReceiver", (req, res) => {
 
 app.listen(process.env.PORT || 3000, function () {
   console.log("working on port 3000");
-});
+})

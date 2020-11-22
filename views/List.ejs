@@ -10,30 +10,26 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1>Album example</h1>
-          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator,
-            etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-          </p>
-        </div>
+      <section class="jumbotron text-center heading">
+        <h1>We Are Sure you will find  a donor </h1>
+        <h2>Wishing you a Speedy Recovery !!!!!!!!</h2>
       </section>
 
       <div class="container">
 
         <div class="row">
           <% for (let i=0;i<results.length;i++){%> %>
-          <div class="col-md-6 col-lg-4">
-            <div class="card mb-4 shadow-sm">
+          <div class="col-md-6 col-lg-4 ">
+            <div class="card mb-4 box shadow-sm">
               <!-- place the images here if required add them in the donor list folder -->
-              <img src="signinFiles/download.jpg" alt="">
+              <h1 class="bldgrp"> <%= results[i].details.bloodGroup %></h1>
               <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
               <div class="card-body">
                 <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
-                <ul>
+                <h1 class="name"><%= results[i].details.name %></h1>
+                <h3 class="age">Age : <%= age[i] %></h3>
+
+                <!-- <ul class="hidden">
                   <li> name: <%= results[i].details.name %></li>
                   <li> contactNo: <%= results[i].details.contactNumber %></li>
                   <li> bloodGroup: <%= results[i].details.bloodGroup %></li>
@@ -42,18 +38,39 @@
                   <li> city: <%= results[i].details.city %></li>
                   <li> state: <%= results[i].details.state %></li>
                   <li> pin: <%= results[i].details.pin %></li>
-                  <li> dateOfBirth: <%= results[i].dateOfBirth %></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <%}%>
-      </div>
-    </div>
+                  <li> dateOfBirth: <%= age[i] %></li>
+                </ul> -->
 
+                <p class="generic"> City : <%= results[i].details.city %></p>
+                <p class="generic"> State : <%= results[i].details.state %> </p>
+
+
+                <p class="phone-no private private<%=i%> hidden"> Contact No : <%= results[i].details.contactNumber %></p>
+
+
+                <p class="email-id private private<%=i%> hidden"> Email :  <%= results[i].details.emailAddress %></p>
+
+                <!-- <p class="private private <%=i%> hidden">Pin: <%= results[i].details.pin%> </p> -->
+
+                <button type="button" class="info-btn btn btn-primary" id="<%=i%>" name="button"> Show Contact Info !! </button>
+
+              </div>
+
+            </div>
+
+          </div>
+          <% } %>
+
+      </div>
+
+    </div>
 </main>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="donorlistFiles/javascript/buttons.js" charset="utf-8"></script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script></body>
+</body>
 </html>

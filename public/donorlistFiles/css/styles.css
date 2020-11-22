@@ -1,4 +1,22 @@
-
+.private{
+  font-size: 1rem;
+  color: gold;
+  font-weight: bold;
+}
+p.generic{
+  color: red;
+  font-weight: bold;
+  font-size: 2rem;
+}
+.heading{
+  color: red;
+}
+h1{
+  font-weight: bolder;
+}
+.age{
+  font-weight: bold;
+}
   .bd-placeholder-img {
     font-size: 1.125rem;
     text-anchor: middle;
@@ -35,6 +53,46 @@ font-weight: 300;
 
 .jumbotron .container {
 max-width: 40rem;
+}
+
+.bldgrp{
+  margin: auto;
+  text-align: center;
+  font-weight:bolder;
+  font-size: 5rem;
+  color: red;
+  border: 10px solid transparent;
+  padding: 15px;
+  /* border-image: url(images/border.png) 30 round; */
+  border-image: url(images/border.png) 30 stretch;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.name{
+  text-align: center;
+  font-stretch: expanded;
+  font-weight: bolder;
+  color: gold;
+  font-size: 3rem;
+}
+
+.age{
+  text-align: right;
+  font-size: 1.3rem;
+  font-weight: lighter;
+}
+
+.box{
+  border: 3px solid transparent;
+  /* background-image: url(images/groovy.png);
+  background-repeat:no-repeat; */
+  /* border-image: url(images/groovy.png) 30 stretch; */
+  border-image: repeating-linear-gradient(30deg,#fdcfdf, #ec524b, #fdcfdf 20px) 60;
+}
+
+.hidden{
+  visibility: hidden;
 }
 
 footer {
