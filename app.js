@@ -76,30 +76,36 @@ function getAge(dateString) {
   }
   return age;
 }
+//you can donate to these
+var bldGrpChartForDonor={
+  "A+":["A+","AB+"],
+  "A-":["A+","AB+","AB-","A-"],
+  "AB+":["AB+"],
+  "AB-":["AB+","AB-"],
+  "B+":["B+","AB+"],
+  "B-":["B+","AB+","B-","AB-"],
+  "O+":["B+","AB+","A+","O+"],
+  "O-":["B+","AB+","B-","AB-","A+","O+","O-","A-"],
+}
+
+var bldGrpChartForRec={
+  "A+":["A+","A-","O+","O-"],
+  "A-":["O-","A-"],
+  "AB+":["B+","AB+","B-","AB-","A+","O+","O-","A-"],
+  "AB-":["B-","AB-","O-","A-"],
+  "B+":["B+","O+","B-","O-"],
+  "B-":["B-","O-"],
+  "O+":["O+","O-"],
+  "O-":["O-"],
+}
 
 //**********************************************************************
-
-//***************************this is the donor collection**************
-/*this is a sample object for donor list*/
-/*
-const donor1=new Donor({
-  name:"yush",
-  contactNo:1234567890,
-  bloodGroup:"b+",
-  gender:1,
-  emailAdress:"abc@xyz.com",
-  city:"new delhi",
-  state:"delhi",
-  pin:110087,
-  dateOfBirth:'2002-12-09'
-})
-// donor1.save();*/
 
 var signedIntoAccount = false;
 
 // GET Request
 // Home
-app.get("/", function (req, res) {
+app.get("/", function(req, res) {
   currentUser = null;
   res.render("home", {
     pageTitle: "home page",
@@ -107,31 +113,33 @@ app.get("/", function (req, res) {
 });
 
 // Sign-in
-app.get("/signin", function (req, res) {
+app.get("/signin", function(req, res) {
   res.render("signin", {
     pageTitle: "Sign In Page",
   });
 });
 
 // ??
-// app.get("/delete/:email", function (req, res) {
-//   const email = req.params.email;
-//   Person.findOneAndRemove({ email: email }, function (err) {
-//     Donor.findOneAndRemove({ emailAdress: email }, function (err) {
-//       Otp.findOneAndRemove({ email: email }, function (err) {
-//         res.send("wiped out everything");
-//       });
-//     });
-//   });
-// });
+/*
+app.get("/delete/:email", function (req, res) {
+  const email = req.params.email;
+  Person.findOneAndRemove({ email: email }, function (err) {
+    Donor.findOneAndRemove({ emailAdress: email }, function (err) {
+      Otp.findOneAndRemove({ email: email }, function (err) {
+        res.send("wiped out everything");
+      });
+    });
+  });
+});
+*/
 
 // sign-up page
-app.get("/signup", function (req, res) {
+app.get("/signup", function(req, res) {
   res.render("signup");
 });
 
 // Successfull Sign-up page
-app.get("/successfulSignUp", function (req, res) {
+app.get("/successfulSignUp", function(req, res) {
   // if (currentUser == null) {
   //   alert("Sign In to Continue");
   //   res.redirect("/signin");
@@ -142,27 +150,28 @@ app.get("/successfulSignUp", function (req, res) {
 });
 
 // ??
-app.get("/donorreceiverpage", function (req, res) {
+/*
+app.get("/donorreceiverpage", function(req, res) {
   // if (currentUser == null) {
   //   alert("Sign In to Continue");
   //   res.redirect("/signin");
   // }
-  Otp.deleteMany({}, function (err) {
+  Otp.deleteMany({}, function(err) {
     res.render("donorReceiverPage", {
       pageTitle: "welcome",
     });
   });
 });
-
+*/
 // about US
-app.get("/aboutus", function (req, res) {
+app.get("/aboutus", function(req, res) {
   res.render("AboutTeam", {
     pageTitle: "about us",
     signedIntoAccount: signedIntoAccount,
     username: "???",
   });
 });
-app.get("/homeAfterSignIn", function (req, res) {
+app.get("/homeAfterSignIn", function(req, res) {
   if (currentUser == null) {
     alert("Sign In to Continue");
     res.redirect("/signin");
@@ -177,8 +186,9 @@ app.get("/becomeADonor", (req, res) => {
     alert("Sign In to Continue");
     res.redirect("/signin");
   }
-  Donor.findOne(
-    { "details.username": currentUser.username },
+  Donor.findOne({
+      "details.username": currentUser.username
+    },
     (err, results) => {
       if (!results) {
         res.render("becomeADonor", {
@@ -186,46 +196,59 @@ app.get("/becomeADonor", (req, res) => {
           pageTitle: "Become A Donor",
         });
       } else {
-        alert("You are already registered as a Donor");
-        res.redirect("/donorList");
+        res.redirect("/receiverListThaknkYou");
       }
     }
   );
 });
+
+app.get("/receiverListThaknkYou", function(req, res) {
+  if (currentUser == null) {
+    alert("Sign In to Continue");
+    res.redirect("/signin");
+  }
+  res.render("receiverListThaknkYou", {
+    pageTitle: "Thank You!",
+    username: currentUser.username,
+  });
+});
+
 app.get("/becomeAReceiver", (req, res) => {
   if (currentUser == null) {
     alert("Sign In to Continue");
     res.redirect("/signin");
   }
 
-  res.render("becomeAReceiver", {
+  res.render("search", {
     username: currentUser.username,
     pageTitle: "Become A Receiver",
   });
 });
 var receiverBloodGroup = null;
 // donor list
-app.get("/donorList", function (req, res) {
+app.get("/donorList", function(req, res) {
   if (currentUser == null) {
     alert("Sign In to Continue");
     res.redirect("/signin");
   }
-  Donor.find(
-    {
-      "details.bloodGroup": receiverBloodGroup,
+  Donor.find({
+     "details.bloodGroup":{$in:bldGrpChartForRec[receiverBloodGroup]},
+      // "details.bloodGroup": receiverBloodGroup,
       "details.state": currentUser.state,
     },
-    function (err, results) {
+    function(err, results) {
       if (!err) {
-        var age=[];
-        for(let i=0;i<results.length;i++){
+        var age = [];
+        for (let i = 0; i < results.length; i++) {
           age.push(getAge(results[i].details.dateOfBirth));
         }
         res.render("List", {
           pageTitle: "donor list",
           results: results,
           username: currentUser.username,
-          age:age
+          age: age,
+          text1: "We Are Sure you will find a donor",
+          text2: "Wishing you a Speedy Recovery !!!!!!!!"
         });
       }
     }
@@ -237,39 +260,51 @@ app.get("/receiverList", (req, res) => {
     alert("Sign In to Continue");
     res.redirect("/signin");
   }
-  Receiver.find(
-    {
+  Receiver.find({
+    "details.bloodGroup":{$in:bldGrpChartForDonor[currentUser.bloodGroup]},
       "details.bloodGroup": currentUser.bloodGroup,
       "details.state": currentUser.state,
     },
-    function (err, results) {
+    function(err, results) {
       if (!err) {
-        res.render("List", {
+        var age = [];
+        for (let i = 0; i < results.length; i++) {
+          age.push(getAge(results[i].details.dateOfBirth));
+        }
+        res.render("list2", {
           pageTitle: "Receiver's List",
           results: results,
+          username: currentUser.username,
+          age: age,
+          text1: "You are doing a fabulous job. Here are some people you can help",
+          text2: "The Blessings you are about to receive are Priceless !!!!!"
         });
       }
     }
   );
 });
-app.get("/logMeOut", function (req, res) {
+app.get("/logMeOut", function(req, res) {
   signedIntoAccount = false;
   res.redirect("/");
 });
 
-app.get("/eligible", function (req, res) {
+app.get("/eligible", function(req, res) {
   res.render("eligible", {
     pageTitle: "check your eligiblity",
+    username: "???",
+    signedIntoAccount: signedIntoAccount,
   });
 });
 
 // post requests
 // Sign In
 var currentUser = null;
-app.post("/signin", function (req, res) {
+app.post("/signin", function(req, res) {
   const ans = req.body;
   console.log(ans);
-  User.findOne({ emailAddress: ans.email }, function (err, results) {
+  User.findOne({
+    emailAddress: ans.email
+  }, function(err, results) {
     if (!results) {
       alert("E-Mail not Found");
       res.redirect("/signin");
@@ -286,58 +321,16 @@ app.post("/signin", function (req, res) {
 });
 
 // Sign up
-app.post("/signup", function (req, res) {
+app.post("/signup", function(req, res) {
   const ans = req.body;
   console.log(ans);
   //********verifying data for duplicacy and genuinity****************
-  /*
-  //1. phone no is 10 digits
-  if (check===1 && (ans.contact_no / 1000000000 >= 10 || ans.contact_no / 1000000000 <1 )) {
-    console.log("Invalid phone no! Plz fill it correctly");
-    check = 0;
-    console.log(check);
-  }
-  console.log(check);
-  //*********************check if username is available or already used up************
-  if (check==1) {
-    Person.findOne({username: ans.user_name}, function(err, results) {
-      if (results) {
-        console.log("came here also");
-        check = 0;
-        console.log("set valid false and am here");
-        console.log("the username is already taken by someone else try something else");
-      }
-    });
-  }
-console.log(check);
-  //***************check if the phone no and the email are not already used
-  if (check===1) {
-    Donor.findOne({ emailAdress: ans.email }, function(err, result) {
-      if (result) {
-        check = 0;
-        console.log("email is already in use");
-      }
-    });
-    Donor.findOne({ contactNo: ans.contact_no }, function(err, result) {
-      if(result){
-        check = 0;
-        console.log("phone no is already in use");
-    }
-    });
-  }
-  //**************password and confirm password are same or not**********
-  if (check===1 && ans.user_password != ans.confirm_password) {
-    check = 0;
-    console.log("password and confirm password donot match plz try again");
-  }
-  if (check===0) {
-    console.log("come here");
-    res.redirect("/signup");
-  }*/
   var valid = 1;
 
   if (valid == 1) {
-    User.findOne({ username: ans.user_name }, function (err, results) {
+    User.findOne({
+      username: ans.user_name
+    }, function(err, results) {
       if (results) {
         valid = 0;
         alert(
@@ -346,15 +339,18 @@ console.log(check);
         );
         res.redirect("/signup");
       } else if (valid === 1) {
-        User.findOne({ emailAddress: ans.email }, function (err, result) {
+        User.findOne({
+          emailAddress: ans.email
+        }, function(err, result) {
           if (result) {
             valid = 0;
             alert("email is already in use", valid);
             res.redirect("/signup");
           } else {
-            User.findOne(
-              { contactNumber: ans.contact_no },
-              function (err, result) {
+            User.findOne({
+                contactNumber: ans.contact_no
+              },
+              function(err, result) {
                 if (result) {
                   valid = 0;
                   alert("phone no is already in use", valid);
@@ -372,7 +368,7 @@ console.log(check);
                   res.redirect("/signup");
                 } else {
                   //**********getting all the info from the user to be fed to the database after verifying*****
-                   // _.upperFirst(_.toLower(str))
+                  // _.upperFirst(_.toLower(str))
                   const newUser = new User({
                     name: _.upperFirst(_.toLower(ans.first_name)) + " " + _.upperFirst(_.toLower(ans.last_name)),
                     bloodGroup: ans.bloodGroup,
@@ -382,7 +378,7 @@ console.log(check);
                     emailAddress: ans.email,
                     password: ans.user_password,
                     contactNumber: ans.contact_no,
-                    city:  ans.city,
+                    city: ans.city,
                     state: ans.state,
                     pin: ans.pin,
                   });
@@ -407,7 +403,7 @@ console.log(check);
                     text: "your Otp is " + randotp2,
                   };
 
-                  transporter.sendMail(mailOptions, function (error, info) {
+                  transporter.sendMail(mailOptions, function(error, info) {
                     if (error) {
                       console.log(error);
                     } else {
@@ -425,38 +421,6 @@ console.log(check);
 
                   res.redirect("/otp");
                 }
-                // res.redirect("/successfulSignUp");
-                /*
-                else {
-                   let sex;
-                   if (ans.department[1] === "Male") {
-                     sex = true;
-                   } else sex = false;
-                   //**********getting all the info from the user to be fed to the database after verifying*****
-                   const donorNew = new Donor({
-                     name: ans.first_name + " " + ans.last_name,
-                     contactNo: ans.contact_no,
-                     bloodGroup: ans.department[0],
-                     gender: sex,
-                     dateOfBirth: ans.dob,
-                     emailAdress: ans.email,
-                     city: ans.city,
-                     state: ans.state,
-                     pin: ans.pin,
-                   });
-                   donorNew.save();
-                   const newPerson = new Person({
-                     details: donorNew,
-                     email: ans.email,
-                     username: ans.user_name,
-                     password: ans.user_password,
-                   });
-                   newPerson.save();
-                   res.render("signinAfterSignupPage", {
-                     pageTitle: "Sign In Page"
-                   });
-                 }
-                 */
               }
             );
           }
@@ -466,27 +430,75 @@ console.log(check);
   }
 });
 
-app.get("/otp", function (req, res) {
-  res.render("otp", { pageTitle: "Otp verification" });
+app.get("/otp", function(req, res) {
+  res.render("otp", {
+    pageTitle: "Otp verification"
+  });
 });
-
-app.post("/otp", function (req, res) {
+/*
+app.post("/otp", function(req, res) {
   const ans = req.body;
   const mobileNo = ans.mobileNo;
   const email = ans.email;
   console.log(ans.mobotp, ans.emailotp);
-  Otp.findOne({ phoneNo: mobileNo, email: email }, function (err, result) {
+  Otp.findOne({
+    phoneNo: mobileNo,
+    email: email
+  }, function(err, result) {
     if (result) {
       console.log(result.otpEmail, result.otpPhone);
       if (ans.mobotp == result.otpPhone && ans.emailotp == result.otpEmail) {
-        Otp.findOneAndRemove({ phoneNo: mobileNo }, function (err) {
+        Otp.findOneAndRemove({
+          phoneNo: mobileNo
+        }, function(err) {
           console.log(err);
           res.redirect("/successfulSignUp");
         });
       } else {
-        Person.findOneAndRemove({ email: email }, function (err) {
+        Person.findOneAndRemove({
+          email: email
+        }, function(err) {
           if (!err) {
-            Donor.findOneAndRemove({ contactNo: mobileNo }, function (err) {
+            Donor.findOneAndRemove({
+              contactNo: mobileNo
+            }, function(err) {
+              if (!err) {
+                res.send("otp is not valid");
+              }
+            });
+          }
+        });
+      }
+    }
+  });
+});
+*/
+app.post("/otp", function(req, res) {
+  const ans = req.body;
+  const mobileNo = ans.mobileNo%10000000000;
+  const email = ans.email;
+  console.log(ans.mobotp, ans.emailotp);
+  Otp.findOne({
+    phoneNo: mobileNo,
+    email: email
+  }, function(err, result) {
+    if (result) {
+      console.log(result.otpEmail, result.otpPhone);
+      if (ans.emailotp == result.otpEmail) {
+        Otp.findOneAndRemove({
+          phoneNo: mobileNo
+        }, function(err) {
+          console.log(err);
+          res.redirect("/successfulSignUp");
+        });
+      } else {
+        Person.findOneAndRemove({
+          email: email
+        }, function(err) {
+          if (!err) {
+            Donor.findOneAndRemove({
+              contactNo: mobileNo
+            }, function(err) {
               if (!err) {
                 res.send("otp is not valid");
               }
@@ -498,8 +510,8 @@ app.post("/otp", function (req, res) {
   });
 });
 
-app.get("/aa", function (req, res) {
-  res.render("donorReceiverPage", {
+app.get("/aa", function(req, res) {
+  res.render("search", {
     pageTitle: "welcome",
   });
 });
@@ -514,8 +526,9 @@ app.post("/becomeADonor", (req, res) => {
 });
 
 app.post("/becomeAReceiver", (req, res) => {
-  Receiver.findOneAndDelete(
-    { "details.username": currentUser.username },
+  Receiver.findOneAndDelete({
+      "details.username": currentUser.username
+    },
     (err, results) => {
       console.log(err);
     }
@@ -529,6 +542,6 @@ app.post("/becomeAReceiver", (req, res) => {
   res.redirect("/donorList");
 });
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT || 3000, function() {
   console.log("working on port 3000");
 })
