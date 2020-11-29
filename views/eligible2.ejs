@@ -1,0 +1,413 @@
+<%-include("partials/header")-%>
+<%-include("partials/aboutusfavicons/favicons")-%>
+
+<!--
+  .container {
+  display: flexbox;
+  justify-content: left;
+}
+-->
+<style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    .heading1{
+      margin-top: 10%;
+    }
+    .signup {
+      margin-left: 10px;
+      padding-left: 23px;
+      padding-right: 23px;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+
+
+  h1{
+  display: block;
+  font-size: 4em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.center {
+  width: 800px;
+  height: 60px;
+  padding: 10px;
+  background: #e4e9f3;
+  color: #fff;
+  font-family: 'Calibri';
+}
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+
+    margin-left: 15%;
+}
+
+.container-fluid{
+  width: 100%;
+  padding: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.top-color{
+  background-color: rgb(228, 105, 23);
+}
+.container-color{
+  background-color: rgba(235, 232, 232, 0.877);
+}
+
+.question{
+  width: 800px;
+  padding: 2px;
+  margin-left: 35px;
+  margin-top: 20px;
+}
+
+.ruler{
+		background-color: rgb(0, 62, 65);
+    height: 3px;
+    width: 350px;
+    }
+
+.v{
+  border-left: 6px solid rgb(250, 144, 22);
+  height: 100%;
+  left: 10%;
+  margin-left: -3px;
+  margin-top: 2%;
+}
+
+  </style>
+  <!-- Custom styles for this template -->
+  <link href="starter-template.css" rel="stylesheet">
+  <link rel="stylesheet" href="navarCss\styles.css">
+</head>
+
+<body>
+  <header>
+    <%-include("partials/navbar")-%>
+  </header>
+
+<!-- ______________________________________________________________
+______________________________________________________________main content
+______________________________________________________________
+ ______________________________________________________________ -->
+ <div class="container-fluid top-color">
+			<h1 style="text-align: center; color: white;">Eligibility</h1>
+			<hr style="height: 4px; width: 300px; background-color: white;">
+</div>
+
+</br></br>
+
+<p style="text-indent: 50px;">
+Some health conditions, medications, and travel locations may temporarily or
+permanently prevent people from donating blood.
+</p>
+
+<p style="text-indent: 50px;">
+Eligible donors are in good health, at least 17 years old, and weigh at least 115 pounds(>53Kg)
+(for whole blood donations) or 110 pounds (for platelet donations).
+</p>
+
+</br>
+<p style="color: rgba(77, 34, 39, 0.966);text-indent: 50px;">
+<strong>Below are the most common eligibiity questions.</strong>
+</p>
+
+
+</br>
+
+
+<!-- Medical conditions div tag-->
+<h2 style="text-align:center;display: block; color:rgb(0, 62, 65);;font-size:30px;">MEDICAL CONDITIONS</h2>
+<hr class="ruler">
+<h5 style="color:rgb(4, 96, 99);font-size:22px;margin-left:80px;"><strong>Can I donate if:</strong></h5>
+
+<div class="container-fluid container-color">
+<div class="row" style=" width: 1100px;">
+<div class="v">
+
+  <!-- 1st question-->
+  <div class="question" style="margin-top: 25px;">
+    <h5 >
+      I HAVE LEUKEMIA, LYMPHOMA OR ANOTHER HEMATOLOGICAL MALIGNANCY?
+    </h5>
+    <p>No ,You can not donate.</p>
+  </div>
+
+
+  <!-- 2nd question-->
+  <div class="question">
+    <h5 >
+      I HAVE BASAL CELL CARCINOMA?
+    </h5>
+    <p> You can donate as early as one day after removal.</p>
+  </div>
+
+  <!-- 3 question-->
+  <div class="question">
+    <h5 >
+      I HAVE CANCER?
+    </h5>
+    If it has been more than 2 years since the end of your treatment, you may be able to donate.
+    Please contact to doctor firstly.
+  </div>
+
+  <!-- 4 question-->
+  <div class="question">
+    <h5 >
+      I HAVE COLD OR FLU SYMPTOMS?
+    </h5>
+    Wait until you have felt well at least for one day.
+  </div>
+
+  <!-- 5 question-->
+  <div class="question">
+    <h5 >
+      I AM PREGNANT?
+    </h5>
+    You must wait until 6-weeks post-delivery.
+  </div>
+
+  <!-- 6 question-->
+  <div class="question">
+    <h5 >
+      I HAVE SYPHILIS OR GONORRHEA?
+    </h5>
+    You may donate 3 months later.
+  </div>
+
+  <!-- 7 question-->
+  <div class="question">
+    <h5 >
+     I HAVE AIDS/HIV?
+    </h5>
+    Regrettably, you cannot donate.
+  </div>
+
+  <!-- 8 question-->
+  <div class="question">
+    <h5 >
+      I HAVE A LOW HEMOGLOBIN/HEMATOCRIT LEVEL?
+    </h5>
+    Wait one day for levels to rise.
+  </div>
+
+
+</div>
+</div>
+</div>
+
+</br></br>
+
+
+<!-- Medical Procedures div tag-->
+<h2 style="text-align:center;display: block; color:rgb(0, 62, 65);;font-size:30px;">MEDICAL PROCEDURES</h2>
+<hr class="ruler">
+<h5 style="color:rgb(4, 96, 99);font-size:22px;margin-left:80px;"><strong>Can I donate if:</strong></h5>
+
+<div class="container-fluid ">
+<div class="row" style="width: 1100px;">
+<div class="v">
+
+  <!-- 1st question-->
+  <div class="question" style="margin-top: 25px;">
+    <h5 >
+      I HAVE A PACEMAKER OR IMPLANTED DEFIBRILLATOR?
+    </h5>
+    No, You cannot donate.
+  </div>
+
+
+  <!-- 2nd question-->
+  <div class="question">
+    <h5 >
+      I HAD HEART SURGERY DUE TO HEART ATTACK?
+    </h5>
+    You may be able to donate 12 months after a heart attack.
+  </div>
+
+  <!-- 3 question-->
+  <div class="question">
+    <h5 >
+      I HAD A COLONOSCOPY?
+    </h5>
+    You may donate if you have had a recent colonoscopy.
+  </div>
+
+  <!-- 4 question-->
+  <div class="question">
+    <h5 >
+      I RECEIVED A BLOOD TRANSFUSION, SKIN GRAFT OR TISSUE TRANSPLANT?
+    </h5>
+    You may donate 3 months later.
+  </div>
+
+
+</div>
+</div>
+</div>
+
+</br></br>
+
+
+<!-- Medications div tag-->
+<h2 style="text-align:center;display: block; color:rgb(0, 62, 65);;font-size:30px;">MEDICATIONS</h2>
+<hr class="ruler">
+<h5 style="color:rgb(4, 96, 99);font-size:22px;margin-left:80px;"><strong>Can I donate if:</strong></h5>
+
+<div class="container-fluid container-color">
+<div class="row" width: 1100px;>
+<div class="v">
+
+  <!-- 1st question-->
+  <div class="question" style="margin-top: 25px;">
+    <h5 >
+      I AM ON ANTIBIOTICS FOR AN INFECTION?
+
+    </h5>
+    Wait until 1-day after completion and no signs or symptoms of infection remain.
+
+  </div>
+
+
+  <!-- 2nd question-->
+  <div class="question">
+    <h5 >
+      I AM ON ASPIRIN, FELDENE, PIROXICAM OR ANY ASPIRIN-CONTAINING PRODUCT?
+    </h5>
+    There is no wait if you are donating whole blood.
+    A 48-hour wait for apheresis platelet donation.
+  </div>
+
+  <!-- 3 question-->
+  <div class="question">
+    <h5 >
+      I AM ON AN EXPERIMENTAL MEDICATION?
+
+    </h5>
+    You may donate 12-months after completion.
+
+  </div>
+
+</div>
+</div>
+</div>
+
+</br></br>
+
+
+
+<!-- Vaccinations  div tag-->
+<h2 style="text-align:center;display: block; color:rgb(20, 62, 65);;font-size:30px;"> VACCINATIONS</h2>
+<hr class="ruler">
+<h5 style="color:rgb(4, 96, 99);font-size:22px;margin-left:80px;"><strong>Can I donate if:</strong></h5>
+
+<div class="container-fluid ">
+<div class="row" width: 1100px;>
+<div class="v">
+
+  <!-- 1st question-->
+  <div class="question" style="margin-top: 25px;">
+    <h5 >
+      I JUST RECEIVED A FLU SHOT?
+
+    </h5>
+    Yes,You can donate.
+  </div>
+
+
+  <!-- 2nd question-->
+  <div class="question">
+    <h5 >
+      I JUST RECEIVED THE HEPATITIS B VACCINATION?
+    </h5>
+     Wait two weeks.
+
+  </div>
+
+  <!-- 3 question-->
+  <div class="question">
+    <h5 >
+      I RECEIVED AN UNLICENSED VACCINE?
+
+    </h5>
+    Wait one year.
+  </div>
+
+  <!-- 4 question-->
+  <div class="question">
+    <h5 >
+      I RECEIVED ANY OTHER VACCINATION?
+    </h5>
+    Consult To a doctor.
+  </div>
+
+
+</div>
+</div>
+</div>
+
+</br></br>
+
+
+
+
+
+
+
+<%-include("partials/footer")-%>
+  </br>
+  </br>
+
+  <footer>
+
+    <div class="footer-main" style="margin-left:20%;">
+    <div >
+        <div >
+            <nav class="social-links col-xl-3" data-context="social-links">
+
+
+            </nav>
+            <nav class="footer-links col-xl-9" data-context="footer-links">
+                <span class="copyright">©2020 The Blood Connect Website</span>
+
+
+                    <a data-aa-footer-link="Footer Link Not Set" href="/" target="_blank">   Home |          </a>
+
+                    <a data-aa-footer-link="Footer Link Not Set" href="/signup""> Sign-Up |</a>
+
+                    <a data-aa-footer-link="Footer Link Not Set" href="/signin" target="_blank">  Sign-In |            </a>
+
+
+                    <a data-aa-footer-link="Footer Link Not Set" href="/AboutTeam">About Us |</a>
+
+
+                    <a data-aa-footer-link="Footer Link Not Set" href="/eligible">Am I Eigible To donate?</a>
+
+
+
+            </nav>
+        </div>
+    </div>
+  </div>
+
+</footer>

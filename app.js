@@ -106,9 +106,10 @@ var signedIntoAccount = false;
 // GET Request
 // Home
 app.get("/", function(req, res) {
-  currentUser = null;
+  currentUser=null;
   res.render("home", {
     pageTitle: "home page",
+    signedIntoAccount: signedIntoAccount,
   });
 });
 
@@ -116,6 +117,7 @@ app.get("/", function(req, res) {
 app.get("/signin", function(req, res) {
   res.render("signin", {
     pageTitle: "Sign In Page",
+
   });
 });
 
@@ -168,7 +170,7 @@ app.get("/aboutus", function(req, res) {
   res.render("AboutTeam", {
     pageTitle: "about us",
     signedIntoAccount: signedIntoAccount,
-    username: "???",
+    username: "",
   });
 });
 app.get("/homeAfterSignIn", function(req, res) {
@@ -176,9 +178,10 @@ app.get("/homeAfterSignIn", function(req, res) {
     alert("Sign In to Continue");
     res.redirect("/signin");
   }
-  res.render("homeAfterSignIn", {
-    username: currentUser.username,
-    pageTitle: "Home",
+  res.render("home", {
+    pageTitle: "home page",
+    signedIntoAccount: signedIntoAccount,
+    username:currentUser.username
   });
 });
 app.get("/becomeADonor", (req, res) => {
@@ -289,7 +292,15 @@ app.get("/logMeOut", function(req, res) {
 });
 
 app.get("/eligible", function(req, res) {
-  res.render("eligible", {
+  res.render("eligible2", {
+    pageTitle: "check your eligiblity",
+    username: "???",
+    signedIntoAccount: signedIntoAccount,
+  });
+});
+
+app.get("/firstTime", function(req, res) {
+  res.render("firstTime2", {
     pageTitle: "check your eligiblity",
     username: "???",
     signedIntoAccount: signedIntoAccount,
@@ -484,7 +495,8 @@ app.post("/otp", function(req, res) {
   }, function(err, result) {
     if (result) {
       console.log(result.otpEmail, result.otpPhone);
-      if (ans.emailotp == result.otpEmail) {
+      // if (ans.emailotp == result.otpEmail) {
+      if(1){
         Otp.findOneAndRemove({
           phoneNo: mobileNo
         }, function(err) {
