@@ -23,7 +23,7 @@ var transporter = nodemailer.createTransport({
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost:27017/NewDb", {
+mongoose.connect("mongodb+srv://admin-yush:yushajay1@cluster0.x2h7y.mongodb.net/NewDb?retryWrites=true&w=majority", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
