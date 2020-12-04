@@ -103,7 +103,11 @@
 
 <body>
   <header>
-    <%-include("partials/navbar")-%>
+    <% if(!signedIntoAccount){ %>
+    <%-include("partials/navbar")%>
+    <%}else{%>
+      <%-include("partials/signInNavbar")%>
+      <%}%>
   </header>
 
 <!-- ______________________________________________________________

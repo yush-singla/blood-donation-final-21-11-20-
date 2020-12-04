@@ -23,7 +23,18 @@
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
-        <p class="chose log-out" style="font-size: 1rem;"><%= username %> </p>
+    <div>
+        <p class="chose username" style="font-size: 1rem;"><%= username %> </p>
         <a href="/logMeOut" class="chose log-out" style="font-size: 1rem;">Log Out</a>
+    </div>
+    <script>
+        document.querySelector(".username").addEventListener("mouseover",()=>{
+            document.querySelector(".log-out").classList.add("unhide");
+        })
+
+        document.querySelector(".username").addEventListener("mouseout",()=>{
+            setTimeout(()=>{document.querySelector(".log-out").classList.remove("unhide");},2000);
+        })
+    </script>
     </div>
 </nav>
