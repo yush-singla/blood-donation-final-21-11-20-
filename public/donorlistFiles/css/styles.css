@@ -1,6 +1,6 @@
 .private{
   font-size: 1rem;
-  color: gold;
+  color: blue;
   font-weight: bold;
 }
 p.generic{
@@ -13,6 +13,21 @@ p.generic{
 }
 h1{
   font-weight: bolder;
+}
+/* section{
+  background-image: url("heart.gif");
+  background-position: center;
+background-repeat: no-repeat;
+background-size: 200px 150px;
+background-size: cover;
+} */
+.good-job{
+  width: 30%;
+  height: 15%;
+}
+.heart{
+  width: 50%;
+  height: 15%;
 }
 .age{
   font-weight: bold;
@@ -60,7 +75,7 @@ max-width: 40rem;
   text-align: center;
   font-weight:bolder;
   font-size: 5rem;
-  color: red;
+  color: green;
   border: 10px solid transparent;
   padding: 15px;
   /* border-image: url(images/border.png) 30 round; */
@@ -73,7 +88,7 @@ max-width: 40rem;
   text-align: center;
   font-stretch: expanded;
   font-weight: bolder;
-  color: gold;
+  color: Blue;
   font-size: 3rem;
 }
 
@@ -89,8 +104,18 @@ max-width: 40rem;
   background-repeat:no-repeat; */
   /* border-image: url(images/groovy.png) 30 stretch; */
   border-image: repeating-linear-gradient(30deg,#fdcfdf, #ec524b, #fdcfdf 20px) 60;
-}
 
+}
+.bg{
+  background-image:url("images.jfif");
+  background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+
+}
+.bg:hover{
+  transform: scale(1.06);
+}
 .hidden{
   visibility: hidden;
 }

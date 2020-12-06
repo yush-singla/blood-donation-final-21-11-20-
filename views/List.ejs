@@ -11,7 +11,8 @@
     <main role="main">
 
       <section class="jumbotron text-center heading">
-        <h1> <%=text1%> </h1>
+        <!-- <h1> <%=text1%> </h1> -->
+        <img class="heart" src="donorlistFiles\css\heart.gif" alt="">
         <h2> <%=text2%> </h2>
       </section>
 
@@ -20,11 +21,11 @@
         <div class="row">
           <% for (let i=0;i<results.length;i++){%> %>
           <div class="col-md-6 col-lg-4 ">
-            <div class="card mb-4 box shadow-sm">
+            <div class="card mb-4 box shadow-sm bg">
               <!-- place the images here if required add them in the donor list folder -->
               <h1 class="bldgrp"> <%= results[i].details.bloodGroup %></h1>
               <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
-              <div class="card-body">
+              <div class="card-body ">
                 <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
                 <h1 class="name"><%= results[i].details.name %></h1>
                 <h3 class="age">Age : <%= age[i] %></h3>
