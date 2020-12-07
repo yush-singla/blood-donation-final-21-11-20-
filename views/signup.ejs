@@ -241,8 +241,34 @@
               <!-- <input name="state" class="form-control" type="text" required> -->
               <select name="state" class="form-control selectpicker" id="" required onchange="makeMenu(this.value)">
                 <option value="" disabled selected>Choose State</option>
-                <option value="Delhi">Delhi</option>
+                 <option value="Delhi">Delhi</option>
                 <option value="UttarPradesh">Uttar Pradesh</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Orissa">Orissa</option>
+                <option value="Assam">Assam</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="West Bengal">west Bengal</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Kerala">Kerala</option>
+
+
+
               </select>
             </div>
           </div>
@@ -268,7 +294,31 @@
         <script>
           var citiesByState = {
             "Delhi": ["New Delhi", "West Delhi", "South Delhi"],
-            "UttarPradesh": ["Noida", "Greater Noida", "Lucknow"]
+            "UttarPradesh": ["Noida", "Greater Noida", "Lucknow","Kanpur"],
+            "Uttarakhand":["Dehradun"],
+            "Himachal Pradesh":["Shimla"],
+            "Punjab":["Amritsar"],
+            "Haryana":["Gurgaon","Faridabad","Hisar"],
+            "Rajasthan":["Jaipur"],
+            "Gujarat":["Ahmedabad","Surat"],
+            "Andhra Pradesh":["Hyderabad"],
+            "Tamil Nadu":["Chennai"],
+            "Karnataka":["Bengaluru"],
+            "Maharashtra":["Mumbai"],
+            "Orissa":["Bubhneshwar"],
+            "Bihar":["Patna"],
+            "Kerala":["Thiruvananatpuram"],
+            "West Bengal":["Kolkatta","Darjelling"],
+            "Assam":["Dispur"],
+            "Arunachal Pradesh":["Itanagar"],
+            "Madhya Pradesh":["Jabalpur","Bhopal"],
+            "Sikkim":["Gangtok"],
+            "Jharkhand":["Ranchi","Bilaspur"],
+            "Mizoram":["Aizwal"],
+            "Nagaland":["Kohima"],
+            "Chhattisgarh":["Raipur"]
+
+
           };
 
           console.log(citiesByState);

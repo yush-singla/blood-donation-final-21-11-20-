@@ -288,7 +288,11 @@ app.get("/receiverList", (req, res) => {
 });
 app.get("/logMeOut", function(req, res) {
   signedIntoAccount = false;
-  res.redirect("/");
+  Receiver.findOneAndDelete({details:currentUser},function(err){
+    Donor.findOneAndDelete({details:currentUser},function(err){
+      res.redirect("/");
+    })
+  })
 });
 
 app.get("/eligible", function(req, res) {
