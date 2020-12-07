@@ -18,21 +18,27 @@ nav ul li a:hover{
   background-color: transparent;
 }
 
-.signup:hover{
-	background-color: crimson;
+.signup:hover {
+  background-color: crimson;
 }
-.log-out{
+.log-out {
   color: white;
 }
-.log-out:hover{
-  color: white;
-}
-.hidden{
+.hidden {
   visibility: collapse;
 }
+/* .ll{
+  text-decoration: none;
+}
+.ll:hover{
+  color: white;
+} */
 nav {
   width: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, .8), rgba(0, 0, 0, .5)), url("https://images.unsplash.com/photo-1523374228107-6e44bd2b524e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80") center no-repeat;
+  height: 10vh;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1523374228107-6e44bd2b524e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80")
+      center no-repeat;
   background-size: cover;
   position: relative;
   overflow: hidden;
@@ -40,25 +46,25 @@ nav {
 .transparent {
   background: transparent;
 }
-li .chose{
+li .chose {
   font-weight: bolder;
   font-size: 1.2rem;
 }
-.text-on-transparen{
+.text-on-transparen {
   color: black;
   font-weight: bolder;
   font-size: 1.2rem;
 }
 nav ul li a::before,
 nav ul li a::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   height: 2px;
   background-color: crimson;
   left: 0;
   transform: scaleX(0);
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 nav ul li a::before {
@@ -78,7 +84,7 @@ nav ul {
 nav ul li {
   list-style: none;
   transform: translateX(100rem);
-  animation: slideIn .5s forwards;
+  animation: slideIn 0.5s forwards;
 }
 
 nav ul li:nth-child(1) {
@@ -86,7 +92,7 @@ nav ul li:nth-child(1) {
 }
 
 nav ul li:nth-child(2) {
-  animation-delay: .5s;
+  animation-delay: 0.5s;
 }
 
 nav ul li:nth-child(3) {
@@ -110,9 +116,27 @@ nav ul li a:hover::after {
 }
 
 @keyframes slideIn {
-  from {}
+  from {
+  }
 
   to {
     transform: translateX(0);
   }
+}
+.log-out {
+  position: absolute;
+  display: none;
+  width: 70px;
+  right: 10px;
+  top: 35px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+.log-out:hover {
+  text-decoration: none;
+}
+.unhide {
+  display: block;
+}
+.username:hover {
+  color: white;
 }

@@ -121,19 +121,7 @@ app.get("/signin", function(req, res) {
   });
 });
 
-// ??
-/*
-app.get("/delete/:email", function (req, res) {
-  const email = req.params.email;
-  Person.findOneAndRemove({ email: email }, function (err) {
-    Donor.findOneAndRemove({ emailAdress: email }, function (err) {
-      Otp.findOneAndRemove({ email: email }, function (err) {
-        res.send("wiped out everything");
-      });
-    });
-  });
-});
-*/
+
 
 // sign-up page
 app.get("/signup", function(req, res) {
@@ -142,35 +130,17 @@ app.get("/signup", function(req, res) {
 
 // Successfull Sign-up page
 app.get("/successfulSignUp", function(req, res) {
-  // if (currentUser == null) {
-  //   alert("Sign In to Continue");
-  //   res.redirect("/signin");
-  // }
+
   res.render("signinAfterSignupPage", {
     pageTitle: "Sign In Page",
   });
 });
 
-// ??
-/*
-app.get("/donorreceiverpage", function(req, res) {
-  // if (currentUser == null) {
-  //   alert("Sign In to Continue");
-  //   res.redirect("/signin");
-  // }
-  Otp.deleteMany({}, function(err) {
-    res.render("donorReceiverPage", {
-      pageTitle: "welcome",
-    });
-  });
-});
-*/
-// about US
 app.get("/aboutus", function(req, res) {
   res.render("AboutTeam", {
     pageTitle: "about us",
     signedIntoAccount: signedIntoAccount,
-    username: "",
+    username: currentUser.username,
   });
 });
 app.get("/homeAfterSignIn", function(req, res) {
@@ -251,7 +221,7 @@ app.get("/donorList", function(req, res) {
           username: currentUser.username,
           age: age,
           text1: "We Are Sure you will find a donor",
-          text2: "Wishing you a Speedy Recovery !!!!!!!!"
+          text2: "Wishing you a Speedy Recovery!"
         });
       }
     }
@@ -280,7 +250,7 @@ app.get("/receiverList", (req, res) => {
           username: currentUser.username,
           age: age,
           text1: "You are doing a fabulous job. Here are some people you can help",
-          text2: "The Blessings you are about to receive are Priceless !!!!!"
+          text2: "The Blessings you are about to receive are Priceless!"
         });
       }
     }
@@ -298,7 +268,7 @@ app.get("/logMeOut", function(req, res) {
 app.get("/eligible", function(req, res) {
   res.render("eligible2", {
     pageTitle: "check your eligiblity",
-    username: "???",
+    username: currentUser.username,
     signedIntoAccount: signedIntoAccount,
   });
 });
@@ -306,7 +276,7 @@ app.get("/eligible", function(req, res) {
 app.get("/firstTime", function(req, res) {
   res.render("firstTime2", {
     pageTitle: "check your eligiblity",
-    username: "???",
+    username: currentUser.username,
     signedIntoAccount: signedIntoAccount,
   });
 });
@@ -450,44 +420,7 @@ app.get("/otp", function(req, res) {
     pageTitle: "Otp verification"
   });
 });
-/*
-app.post("/otp", function(req, res) {
-  const ans = req.body;
-  const mobileNo = ans.mobileNo;
-  const email = ans.email;
-  console.log(ans.mobotp, ans.emailotp);
-  Otp.findOne({
-    phoneNo: mobileNo,
-    email: email
-  }, function(err, result) {
-    if (result) {
-      console.log(result.otpEmail, result.otpPhone);
-      if (ans.mobotp == result.otpPhone && ans.emailotp == result.otpEmail) {
-        Otp.findOneAndRemove({
-          phoneNo: mobileNo
-        }, function(err) {
-          console.log(err);
-          res.redirect("/successfulSignUp");
-        });
-      } else {
-        Person.findOneAndRemove({
-          email: email
-        }, function(err) {
-          if (!err) {
-            Donor.findOneAndRemove({
-              contactNo: mobileNo
-            }, function(err) {
-              if (!err) {
-                res.send("otp is not valid");
-              }
-            });
-          }
-        });
-      }
-    }
-  });
-});
-*/
+
 app.post("/otp", function(req, res) {
   const ans = req.body;
   const mobileNo = ans.mobileNo%10000000000;
@@ -526,11 +459,11 @@ app.post("/otp", function(req, res) {
   });
 });
 
-app.get("/aa", function(req, res) {
-  res.render("search", {
-    pageTitle: "welcome",
-  });
-});
+// app.get("/aa", function(req, res) {
+//   res.render("search", {
+//     pageTitle: "welcome",
+//   });
+// });
 app.post("/becomeADonor", (req, res) => {
   const newDonor = new Donor({
     details: currentUser,

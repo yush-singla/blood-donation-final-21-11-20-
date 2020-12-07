@@ -23,7 +23,25 @@
       <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form> -->
-        <p class="chose log-out" style="font-size: 1rem;"><%= username %> </p>
-        <a href="/logMeOut" class="chose log-out" style="font-size: 1rem;">Log Out</a>
+    <div>
+        <p class="chose username" style="font-size: 1rem;"><%= username %> </p>
+        <!-- <button type="button" class="log-out ll btn btn-primary btn-sm" style="width: 10%" name="button">
+          <a href="/logMeOut" class="chose " style="font-size: 1rem;">Log Out</a>
+        </button> -->
+        <a href="/logMeOut">
+          <button type="button" style="width: 10%; font-size:0.6rem;" class="log-out btn btn-secondary btn-sm signup ">Log Out</button>
+        </a>
+    </div>
+    <script>
+        document.querySelector(".username").addEventListener("mouseover",()=>{
+            document.querySelector(".log-out").classList.add("unhide");
+        })
+
+        document.querySelector(".username").addEventListener("mouseout",()=>{
+          document.querySelector(".log-out").addEventListener("mouseout",()=>{
+            setTimeout(()=>{document.querySelector(".log-out").classList.remove("unhide");},500);
+        })
+      })
+    </script>
     </div>
 </nav>
