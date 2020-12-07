@@ -175,18 +175,23 @@
           <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
           <img src="homeFiles/img5.jpg" class="img1" alt="">
           <h2>Am I Eligible to donate ? </h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies
-            vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus
-            magna.</p>
+          <p>A healthy individual can donate blood once every month.
+To ensure the safety of both patients and donors, these are some of the requirements
+donors must meet to be eligible to donate blood based on their donation type.
+
+Learn more about general health, travel, medications, tattoos
+and about the eligibility requirements to donate blood by clicking below.</p>
           <p><a class="btn btn-secondary" href="/eligible" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-6">
           <!-- <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg> -->
           <img src="homeFiles/img6.jpg" class="img11" alt="">
           <h2>Never donated blood before ? </h2>
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras
-            mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh.</p>
+          <p>Blood Donation is a COMPLETELY SAFE healthy activity with no side-effects whatsoever and it leads to a more fulfilling life.
+Each year, approximately 15 million people require blood. Even more blood is required as we go through this pandemic.
+Every day, blood donations help patients of all ages: accident and burn victims, heart surgery and organ transplant patients,
+ and those battling cancer.
+See FAQs to know more by clicking below.</p>
           <p><a class="btn btn-secondary" href="/firstTime" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <!-- <div class="col-lg-4">
@@ -223,8 +228,7 @@
         <div class="col-md-7 order-md-2">
           <h2 class="featurette-heading">Convinient and Hassle free process <span class="text-muted">For donors as well
               as receivers .</span></h2>
-          <p class="lead">Follow 1 step registration process. It is a safe and secure way to make a difference in
-            someone's life. Each drop of blood counts. We all come together as a team to help you achieve that </p>
+          <p class="lead">We aim to make the best use of contemporary technologies in delivering a promising web portal to bring together  blood donors to fulfill all the requests in our country. Join us make a difference in someone's life and turn strangers into friends. Each drop of blood counts. We all come together as a team to help you achieve that</p>
         </div>
         <div class="col-md-5 order-md-1">
           <!-- <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg> -->
@@ -244,12 +248,14 @@
     $('.brand').addClass('text-on-transparen');
     $('.signup').addClass('text-on-transparen');
     $('.brand').removeClass('navbar-brand');
+    $('p.chose').removeClass('username1');
     $(window).scroll(function() {
       if ($(document).scrollTop() > 60) {
         $('nav').removeClass('transparent');
         $('.chose').removeClass('text-on-transparen');
         $('.brand').removeClass('text-on-transparen');
         $('.brand').addClass('navbar-brand');
+        $('p.chose').addClass('username1');
         $('.signup').removeClass('text-on-transparen');
       } else {
         $('nav').addClass('transparent');
@@ -257,6 +263,7 @@
         $('.brand').addClass('text-on-transparen');
         $('.signup').addClass('text-on-transparen');
         $('.brand').removeClass('navbar-brand');
+        $('p.chose').removeClass('username1');
       }
     });
     $(document).ready(function( $ ){

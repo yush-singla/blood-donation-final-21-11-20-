@@ -137,6 +137,6 @@ nav ul li a:hover::after {
 .unhide {
   display: block;
 }
-.username:hover {
+.username1{
   color: white;
 }
