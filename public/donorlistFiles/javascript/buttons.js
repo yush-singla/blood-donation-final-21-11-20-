@@ -2,10 +2,10 @@ $(".info-btn").click(function() {
 
   var userChosenNo = $(this).attr("id");
 
-  var mssg = prompt("We value our donors. It is a humble request plz be " +
-    "polite with them and don't bother them again and again if they don't pick up or hang up." +
-    "There are many more people who will be more than happy to help YOU!!!!" +
-    "\nPlease write YES below to continue "
+  var mssg = prompt("Please Make Sure you agree to the following guidelines before we show you contacts information,"+
+"\n1. Please be civil and polite to the people you are contacting"+
+"\n2. Please don't call the donors repetively and disturb their peace of mind "+
+"\nPlease type YES if you agree"
 
   )
   if (mssg == "YES" || mssg == "yes" || mssg === "Yes") {
